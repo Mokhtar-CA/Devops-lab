@@ -13,8 +13,7 @@ pipeline {
            }
 
         }
-    }
-    stages{
+    
         stage ("checkout from scm"){
            steps{
                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Mokhtar-CA/Devops-lab.git'
