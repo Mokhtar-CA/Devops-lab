@@ -32,16 +32,14 @@ pipeline {
            }
 
         }
-        stage ("sonarqube Analysis"){
-           steps{
-            script {
-                sh "curl -v http://sonarqube:9000/api/system/status"
+         stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonarqubecred') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
             }
-              withSonarQubeEnv('sonarqube-scanner') {
-                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=my-project-key -Dsonar.host.url=http://sonarqube:9000"
-
-              }
-           }
 
         }
     }
