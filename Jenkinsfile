@@ -34,8 +34,11 @@ pipeline {
         }
         stage ("sonarqube Analysis"){
            steps{
+            script {
+                sh "curl -v http://sonarqube:9000/api/system/status"
+            }
               withSonarQubeEnv('sonarqube-scanner') {
-                sh "mvn sonar:sonar"
+                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=my-project-key -Dsonar.host.url=http://sonarqube:9000"
 
               }
            }
