@@ -41,15 +41,15 @@ pipeline {
                 }
             }
 
-        }
+        
          stage ("Quality Gate"){
            steps{
                script {
                     aitForQualityGate abortPipeline: false, credentialsId: 'sonarqubecred'
+                  }
+
+                }
            }
 
-        }
     }
-
-
 }
